@@ -15,14 +15,37 @@ body {
 }
 
 header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 15vh;
     width: 20vw;
-    background: linear-gradient(hsl(36, 76%, 45%), hsl(30, 76%, 45%));
+    background: linear-gradient(hsl(29, 79%, 56%), hsl(29, 90%, 67%));
     border: 2px solid hsl(0, 0%, 79%);
     border-bottom: none;
     border-top: none;
 }
 
+/*      NAV     */
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 85vh;
+    width: 20vw;
+    background-color: hsla(219, 100%, 50%, 0.048);
+    border: 2px solid hsl(0, 0%, 79%);
+}
+
+.main-projects-list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+/*      MAIN    */
 main {
     display: flex;
     justify-content: center;
@@ -32,14 +55,7 @@ main {
     width: 80vw;
 }
 
-.nav {
-    height: 85vh;
-    width: 20vw;
-    background-color: hsla(219, 100%, 50%, 0.048);
-    border: 2px solid hsl(0, 0%, 79%);
-}
-
-.todo-list {
+.todo-list-wrapper {
     width: 80vw;
     height: 100vh;
     position: relative;
@@ -61,4 +77,65 @@ main {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+}
+
+/*  FORM    */
+form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+form input,
+form button {
+    padding: 0.5rem;
+    font-size: 2rem;
+    border: none;
+    background: white;
+}
+
+form button {
+    background-color: blue;
+    color: white;
+    cursor: pointer;
+}
+
+/*  TODO LIST   */
+.todo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.todo-list {
+    min-width: 30vw;
+    list-style: none;
+}
+
+.todo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0.5rem;
+    background: white;
+    color: black;
+    font-size: 1.5rem;
+}
+
+.todo li {
+    flex: 1;
+}
+
+.trash-button,
+.complete-button {
+    background: orange;
+    color: white;
+    border: none;
+    padding: 1rem;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.complete-button {
+    background: green;
 }
