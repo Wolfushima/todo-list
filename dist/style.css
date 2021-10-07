@@ -93,11 +93,49 @@ form button {
     border: none;
     background: white;
 }
+.todo-input {
+    width: 50%;
+    height: 50px;
+}
 
 form button {
     background-color: blue;
     color: white;
     cursor: pointer;
+    height: 50px;
+}
+
+select {
+    background: white;
+    width: 10rem;
+    height: 50px;
+    cursor: pointer;
+    padding: 1rem;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+    border: none;
+}
+.select {
+    margin: 1rem;
+    position: relative;
+    overflow: hidden;
+}
+.select::after {
+    content: "\25BC";
+    position: absolute;
+    background: blue;
+    top: 0;
+    right: 0;
+    padding: 1rem;
+    pointer-events: none;
+}
+
+.date-picker {
+    font-size: 1rem;
+    min-width: fit-content;
+    height: 50px;
 }
 
 /*  TODO LIST   */
