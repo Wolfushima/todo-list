@@ -1,36 +1,28 @@
-import { pubsub } from "./pubsub";
-const todoInput = document.querySelector(".todo-input");
-const todoButton = document.querySelector(".todo-button");
-const todoList = document.querySelector(".todo-list");
-todoButton.addEventListener("click", addTodo);
+import { pubsub } from "./pubsub.js";
+import { todoForm } from "./todo-form.js";
+import { todos } from "./todos.js";
 
-function addTodo(event) {
-    event.preventDefault();
-    
-    
-    const todoDiv = document.createElement("div");
-    todoDiv.classList.add("todo");
+// FORM
+    // each todo is gonna have a title,
+    //                           priority(normal, anytime, important),
+    //                           date(except anytime),
+    //                           description property
 
-    const newTodo = document.createElement("li");
-    newTodo.textContent = todoInput.value;
-    newTodo.classList.add("todo-item");
-    todoDiv.appendChild(newTodo);
+// BUTTONS
+    //  for each button we are gonna do different things
+    // today is gonna filter todos with the current date,
+    // upcoming is gonna filter todos with a date between current date and next 7 days.
+    // anytime and important is gonna filter todos labeled with that tag
 
-    //CHECK MARK BUTTON
-    const completedButton = document.createElement("button");
-    completedButton.textContent = "+";
-    completedButton.classList.add("complete-button");
-    todoDiv.appendChild(completedButton);
+// TODOS
+    // each todo is gonna be stored inside an array
+// PROJECTS
+    // 
 
-    //CHECK TRASH BUTTON
-    const trashButton = document.createElement("button");
-    trashButton.textContent = "-";
-    trashButton.classList.add("trash-button");
-    todoDiv.appendChild(trashButton);
-
-    //APPEND TO LIST
-    todoList.appendChild(todoDiv);
-}
+document.addEventListener("DOMContentLoaded", () => {
+    todos.init();
+    todoForm.init();
+})
 
 
 
