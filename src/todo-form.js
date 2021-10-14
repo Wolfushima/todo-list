@@ -14,10 +14,6 @@ export const todoForm = {
     },
     add: event => {
         event.preventDefault();
-        console.log(todoForm.title.value);
-        console.log(todoForm.priority.value);
-        console.log(date.value);
-        console.log(todoForm.description.value);
         const todo = new Todo(todoForm.title.value, todoForm.priority.value, date.value, todoForm.description.value);
         pubsub.publish("todoAdded", todo);
     }

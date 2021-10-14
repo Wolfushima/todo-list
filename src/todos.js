@@ -9,6 +9,10 @@ export class Todo {
     }
 }
 
+//  Things TO ADD
+//  prevent adding a todo when there is already one with the same values
+
+
 export const todos = {
     todosList: [],
     init: () => {
@@ -16,8 +20,8 @@ export const todos = {
     },
     todoAdded: todo => {
         todos.todosList.push(todo)
-        // pubsub.publish("todosUpdated", todos.todoList)
         todos.todoCreateElement(todo);
+
         const checkButton = document.querySelectorAll(".complete-button");
         const trashButton = document.querySelectorAll(".trash-button");
 
@@ -27,12 +31,21 @@ export const todos = {
         trashButton.forEach(button => {
             button.addEventListener("click", todos.todoTrashed);
         })
+        // pubsub.publish("todosUpdated", todos.todoList)
     },
     todoChecked: event => {
-        console.log("");
+        console.log(todos.todosList)
     },
     todoTrashed: event => {
         let todoWrapper = event.target.closest(".todo-wrapper");
+        let todoTitle = todoWrapper.querySelector(".title-content").textContent;
+        let todoDate = todoWrapper.querySelector(".date-content").textContent;
+        let todoDescription = todoWrapper.querySelector(".description-content").textContent;
+
+        todos.todosList = todos.todosList.filter(todo => {
+            return (todo.title !== todoTitle) && (todo.date !== todoDate) && (todo.description !== todoDescription);
+        })
+
         todoWrapper.parentElement.removeChild(todoWrapper);
     },
     todoCreateElement: todo => {
@@ -47,7 +60,8 @@ export const todos = {
         todoTitleDiv.classList.add("todo-element-title");
 
         const newTodoTitle = document.createElement("h3");
-        newTodoTitle.textContent = "Todo Title";
+        newTodoTitle.classList.add("title-content");
+        newTodoTitle.textContent = todo.title;
         todoTitleDiv.appendChild(newTodoTitle);
 
         //date
@@ -56,7 +70,8 @@ export const todos = {
         todoDateDiv.classList.add("todo-element-date");
 
         const newTodoDate = document.createElement("h3");
-        newTodoDate.textContent = "Todo Date Due";
+        newTodoDate.classList.add("date-content");
+        newTodoDate.textContent = todo.date;
         todoDateDiv.appendChild(newTodoDate);
 
         //description
@@ -66,7 +81,7 @@ export const todos = {
 
         const newTodoDescription = document.createElement("li");
         newTodoDescription.textContent = todo.description;
-        newTodoDescription.classList.add("todo-item");
+        newTodoDescription.classList.add("description-content");
         todoDescriptionDiv.appendChild(newTodoDescription);
 
         //CHECK MARK BUTTON
