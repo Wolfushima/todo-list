@@ -2,9 +2,9 @@ import { pubsub } from "./pubsub.js";
 import { Todo } from "./todos.js";
 
 export const todoForm = {
+    form: document.querySelector("#hero-form"),
     init: () => {
-        const form = document.querySelector("#hero-form");
-        form.addEventListener("submit", todoForm.add);
+        todoForm.form.addEventListener("submit", todoForm.add);
     },
     add: event => {
         event.preventDefault();
@@ -17,5 +17,6 @@ export const todoForm = {
 
         const todo = new Todo(title, priority, date, description);
         pubsub.publish("todoAdded", todo);
+        todoForm.form.reset();
     }
 }
