@@ -2,19 +2,20 @@ import { pubsub } from "./pubsub.js";
 import { Todo } from "./todos.js";
 
 export const todoForm = {
-    //QuerySelectors
-    title: document.querySelector(".todo-title"),
-    priority: document.getElementById("filter-todo"),
-    date: document.getElementById("date"),
-    description: document.querySelector(".todo-description"),
-
     init: () => {
-        const todoButton = document.querySelector(".todo-button");
-        todoButton.addEventListener("click", todoForm.add);
+        const form = document.querySelector("#hero-form");
+        form.addEventListener("submit", todoForm.add);
     },
     add: event => {
         event.preventDefault();
-        const todo = new Todo(todoForm.title.value, todoForm.priority.value, date.value, todoForm.description.value);
+        const title = document.querySelector(".todo-title").value;
+        let priority = document.getElementById("filter-todo").value;
+        const date = document.getElementById("date").value;
+        const description = document.querySelector(".todo-description").value;
+
+        if (priority === "") { priority = "normal" };
+
+        const todo = new Todo(title, priority, date, description);
         pubsub.publish("todoAdded", todo);
     }
 }
