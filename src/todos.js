@@ -12,11 +12,24 @@ export class Todo {
 //  Things TO ADD
 //  prevent adding a todo when there is already one with the same values
 
+//  Make a storage module
+//      - Inside this module make an object literal with the name of storage
+//        subscribe to "todoAdded" todos.todoAdded
+//      - Make a method that when the page renders it publish an array with all the todos stored in the storage
+//        publish to "todoAdded" todos.todoAdded (will probably have to change todoCreateElement method
+//        to a spread operator syntax so it can take multiple objects, and for each object create the element)
+
 
 export const todos = {
     todosList: [],
     init: () => {
         pubsub.subscribe("todoAdded", todos.todoAdded);
+        pubsub.subscribe("storedTodos", todos.renderStoredTodos);
+    },
+    renderStoredTodos: storedTodos => {
+        storedTodos.forEach(todo => {
+            todos.todoAdded(todo)
+        })
     },
     todoAdded: todo => {
         todos.todosList.push(todo)
@@ -34,6 +47,7 @@ export const todos = {
         // pubsub.publish("todosUpdated", todos.todoList)
     },
     todoChecked: event => {
+        console.log(pubsub.events)
         console.log(todos.todosList)
     },
     todoTrashed: event => {
