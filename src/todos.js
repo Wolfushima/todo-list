@@ -1,35 +1,31 @@
 import { pubsub } from "./pubsub.js";
 
-export class Todo {
-    constructor(title, priority, date, description) {
-        this.title = title;
-        this.priority = priority;
-        this.date = date;
-        this.description = description;
-    }
-}
-
-//  Things TO ADD
-//  prevent adding a todo when there is already one with the same values
-
-//  Make a storage module
-//      - Inside this module make an object literal with the name of storage
-//        subscribe to "todoAdded" todos.todoAdded
-//      - Make a method that when the page renders it publish an array with all the todos stored in the storage
-//        publish to "todoAdded" todos.todoAdded (will probably have to change todoCreateElement method
-//        to a spread operator syntax so it can take multiple objects, and for each object create the element)
-
-
 export const todos = {
     todosList: [],
     init: () => {
-        pubsub.subscribe("todoAdded", todos.todoAdded);
+        pubsub.subscribe("todoForm", todos.handleTodo);
         pubsub.subscribe("storedTodos", todos.renderStoredTodos);
     },
     renderStoredTodos: storedTodos => {
         storedTodos.forEach(todo => {
             todos.todoAdded(todo)
         })
+    },
+    handleTodo: todo => {
+        //CHECK IF TODO ALREADY EXIST
+        function arrayEquals(a, b) {
+            return Array.isArray(a) && Array.isArray(b) &&
+                   a.length === b.length &&
+                   a.every((val, index) => val === b[index])
+        }
+
+        if (todos.todosList.some(element => { return arrayEquals(Object.values(element), Object.values(todo)); })) {
+            alert("it already exists");
+        }
+        else {
+            todos.todoAdded(todo);
+            pubsub.publish("todoAdded", todo);
+        }
     },
     todoAdded: todo => {
         todos.todosList.push(todo)
@@ -44,23 +40,27 @@ export const todos = {
         trashButton.forEach(button => {
             button.addEventListener("click", todos.todoTrashed);
         })
-        // pubsub.publish("todosUpdated", todos.todoList)
     },
     todoChecked: event => {
         console.log(pubsub.events)
         console.log(todos.todosList)
     },
     todoTrashed: event => {
+        console.log(todos.todosList)
         let todoWrapper = event.target.closest(".todo-wrapper");
         let todoTitle = todoWrapper.querySelector(".title-content").textContent;
         let todoDate = todoWrapper.querySelector(".date-content").textContent;
         let todoDescription = todoWrapper.querySelector(".description-content").textContent;
-
-        todos.todosList = todos.todosList.filter(todo => {
-            return (todo.title !== todoTitle) && (todo.date !== todoDate) && (todo.description !== todoDescription);
+        let todoIndex = todos.todosList.findIndex(element => {
+            return element.title === todoTitle && element.date === todoDate && element.description === todoDescription;
         })
 
+        todos.todosList.splice(todoIndex, 1)
+
         todoWrapper.parentElement.removeChild(todoWrapper);
+
+        // PUBSUB PUBLISH
+        pubsub.publish("todosUpdated", todos.todosList)
     },
     todoCreateElement: todo => {
         const todoList = document.querySelector(".todo-list");

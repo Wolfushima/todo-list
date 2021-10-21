@@ -4,6 +4,7 @@ export const storage = {
     init: () => {
         storage.renderTodos();
         pubsub.subscribe("todoAdded", storage.saveLocalTodos);
+        pubsub.subscribe("todosUpdated", storage.updateLocalStorage);
     },
     saveLocalTodos: todo => {
         let todos;
@@ -27,5 +28,17 @@ export const storage = {
         }
 
         pubsub.publish("storedTodos", storedTodos);
+    },
+    updateLocalStorage: toDeleteTodos => {
+        let storedTodos;
+        if (localStorage.getItem("todos") === null) {
+            storedTodos = [];
+        }
+        else {
+            storedTodos = JSON.parse(localStorage.getItem("todos"));
+        }
+
+        storedTodos = toDeleteTodos;
+        localStorage.setItem("todos", JSON.stringify(storedTodos));
     }
 }

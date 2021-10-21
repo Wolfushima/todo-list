@@ -1,5 +1,13 @@
 import { pubsub } from "./pubsub.js";
-import { Todo } from "./todos.js";
+
+class Todo {
+    constructor(title, priority, date, description) {
+        this.title = title;
+        this.priority = priority;
+        this.date = date;
+        this.description = description;
+    }
+}
 
 export const todoForm = {
     form: document.querySelector("#hero-form"),
@@ -16,7 +24,7 @@ export const todoForm = {
         if (priority === "") { priority = "normal" };
 
         const todo = new Todo(title, priority, date, description);
-        pubsub.publish("todoAdded", todo);
+        pubsub.publish("todoForm", todo);
         todoForm.form.reset();
     }
 }
