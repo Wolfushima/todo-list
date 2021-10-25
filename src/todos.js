@@ -66,6 +66,9 @@ export const todos = {
         const todoWrapper = document.createElement("div");
         todoWrapper.classList.add("todo-wrapper");
 
+        //CHECK PRIORITY
+        todos.todoCheckPriority(todo, todoWrapper);
+
         //TODO ELEMENT CONTENT
         //title
         const todoTitleDiv = document.createElement("div");
@@ -115,5 +118,11 @@ export const todos = {
         todoWrapper.appendChild(todoDescriptionDiv);
 
         todoList.appendChild(todoWrapper);
+    },
+    todoCheckPriority: (todo, todoWrapper) => {
+        if (todo.priority === "important") {
+            todoWrapper.style.background = "red";
+            todoWrapper.classList.add("important");
+        }
     }
 }
