@@ -124,5 +124,9 @@ export const todos = {
             todoWrapper.style.background = "red";
             todoWrapper.classList.add("important");
         }
+        else if (todo.priority === "anytime") {
+            todoWrapper.style.background = "blue";
+            todoWrapper.classList.add("anytime");
+        }
     }
 }
