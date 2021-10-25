@@ -2,6 +2,7 @@ import { pubsub } from "./pubsub.js";
 import { todoForm } from "./todo-form.js";
 import { todos } from "./todos.js";
 import { storage } from "./storage.js";
+import { today } from "./today.js";
 
 // FORM
     // each todo is gonna have a title,
@@ -24,6 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
     todos.init();
     todoForm.init();
     storage.init();
+    today.init();
 })
 
 

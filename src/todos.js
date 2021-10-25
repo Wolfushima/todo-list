@@ -20,7 +20,7 @@ export const todos = {
         }
 
         if (todos.todosList.some(element => { return arrayEquals(Object.values(element), Object.values(todo)); })) {
-            alert("it already exists");
+            alert("Todo already exists.");
         }
         else {
             todos.todoAdded(todo);
@@ -40,13 +40,12 @@ export const todos = {
         trashButton.forEach(button => {
             button.addEventListener("click", todos.todoTrashed);
         })
+
     },
     todoChecked: event => {
-        console.log(pubsub.events)
         console.log(todos.todosList)
     },
     todoTrashed: event => {
-        console.log(todos.todosList)
         let todoWrapper = event.target.closest(".todo-wrapper");
         let todoTitle = todoWrapper.querySelector(".title-content").textContent;
         let todoDate = todoWrapper.querySelector(".date-content").textContent;
@@ -55,12 +54,12 @@ export const todos = {
             return element.title === todoTitle && element.date === todoDate && element.description === todoDescription;
         })
 
-        todos.todosList.splice(todoIndex, 1)
+        todos.todosList.splice(todoIndex, 1);
 
         todoWrapper.parentElement.removeChild(todoWrapper);
 
         // PUBSUB PUBLISH
-        pubsub.publish("todosUpdated", todos.todosList)
+        pubsub.publish("todosUpdated", todos.todosList);
     },
     todoCreateElement: todo => {
         const todoList = document.querySelector(".todo-list");
