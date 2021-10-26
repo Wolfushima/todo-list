@@ -104,13 +104,13 @@ export const todos = {
         const completedButton = document.createElement("button");
         completedButton.textContent = "+";
         completedButton.classList.add("complete-button");
-        todoDescriptionDiv.appendChild(completedButton);
+        todoTitleDiv.appendChild(completedButton);
 
         //CHECK TRASH BUTTON
         const trashButton = document.createElement("button");
         trashButton.textContent = "-";
         trashButton.classList.add("trash-button");
-        todoDescriptionDiv.appendChild(trashButton);
+        todoTitleDiv.appendChild(trashButton);
 
         //APPEND TO LIST
         todoWrapper.appendChild(todoTitleDiv);
@@ -121,11 +121,11 @@ export const todos = {
     },
     todoCheckPriority: (todo, todoWrapper) => {
         if (todo.priority === "important") {
-            todoWrapper.style.background = "red";
+            todoWrapper.style.background = "#e68585";
             todoWrapper.classList.add("important");
         }
         else if (todo.priority === "anytime") {
-            todoWrapper.style.background = "blue";
+            todoWrapper.style.background = "#68a9ff85";
             todoWrapper.classList.add("anytime");
         }
     }
