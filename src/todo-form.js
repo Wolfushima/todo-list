@@ -13,6 +13,7 @@ export const todoForm = {
     form: document.querySelector("#hero-form"),
     init: () => {
         todoForm.form.addEventListener("submit", todoForm.add);
+        todoForm.openForm();
     },
     add: event => {
         event.preventDefault();
@@ -26,5 +27,47 @@ export const todoForm = {
         const todo = new Todo(title, priority, date, description);
         pubsub.publish("todoForm", todo);
         todoForm.form.reset();
+        todoForm.handleOpenFormBtn();
+        todoForm.handleForm();
+    },
+    openForm: () => {
+        const openFormBtn = document.querySelector(".open-form-btn");
+        const formBtn = document.querySelector("form button");
+        const formTitle = document.querySelector(".todo-title");
+        const formSelect = document.querySelector(".select");
+        const formDate = document.querySelector(".date-picker");
+        const formDescription = document.querySelector(".todo-description");
+
+        openFormBtn.addEventListener("click", () => {
+            openFormBtn.style.display = "none";
+            formBtn.style.display = "flex";
+            formTitle.style.display = "block";
+            formSelect.style.display = "block";
+            formDate.style.display = "block";
+            formDescription.style.display = "block";
+        })
+    },
+    handleOpenFormBtn: () => {
+        const mediaQuery = window.matchMedia('(max-width: 900px)')
+        const openFormBtn = document.querySelector(".open-form-btn");
+        if ((mediaQuery.matches) && (openFormBtn.style.display === "none")) {
+            openFormBtn.style.display = "block";
+        }
+    },
+    handleForm: () => {
+        const mediaQuery = window.matchMedia('(max-width: 900px)')
+        const formBtn = document.querySelector("form button");
+        const formTitle = document.querySelector(".todo-title");
+        const formSelect = document.querySelector(".select");
+        const formDate = document.querySelector(".date-picker");
+        const formDescription = document.querySelector(".todo-description");
+
+        if (mediaQuery.matches) {
+            formBtn.style.display = "none";
+            formTitle.style.display = "none";
+            formSelect.style.display = "none";
+            formDate.style.display = "none";
+            formDescription.style.display = "none";
+        }
     }
 }
