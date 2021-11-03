@@ -129,6 +129,10 @@ form button {
     font-size: 2rem;
     border: none;
     background: white;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    font-weight: 900;
+    letter-spacing: 1px;
 }
 .todo-input {
     width: 50%;
@@ -173,6 +177,10 @@ select {
     appearance: none;
     outline: none;
     border: none;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    font-weight: 900;
+    letter-spacing: 1px;
 }
 .select {
     margin: 1rem;
@@ -197,12 +205,29 @@ select {
 .date-picker {
     font-size: 1rem;
     min-width: fit-content;
-    height: 50px;
+    min-height: 50px;
     margin: 1rem;
     padding-left: 1rem;
+    letter-spacing: 1px;
 }
 ::-webkit-calendar-picker-indicator{
     margin-left: -10px;
+}
+
+.open-form-btn {
+    display: none;
+    background-color: rgba(255, 255, 255, 0);
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    min-height: 50px;
+    max-height: 50px;
+    min-width: 50px;
+    max-width: 50px;
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
 }
 
 /*  TODO LIST   */
@@ -257,6 +282,18 @@ select {
     margin-right: 5px;
 }
 
+button.complete-button:hover {
+    background: hsl(145, 86%, 35%);
+}
+button.trash-button:hover {
+    background: hsl(28, 100%, 45%);
+}
+
+button.complete-button:active,
+button.trash-button:active {
+    transform: scale(0.9);
+}
+
 .todo-element-title {
     display: flex;
 }
@@ -271,6 +308,8 @@ h3 {
     padding: 5px;
     background-color: #e2e8f0;
     border-radius: 4px;
+    border: 1px solid #7a7a7a;
+    min-width: 300px;
 }
 .description-content {
     overflow: hidden;
@@ -293,4 +332,63 @@ h3 {
     color: #3f4164;
     letter-spacing: 0.3rem;
     font-family: 'Times New Roman', Times, serif;
+}
+
+
+/* RESPONSIVENESS */
+@media screen and (max-width: 900px) {
+    /* FORM */
+    form {
+        flex-direction: column;
+        height: min-content;
+    }
+    form button {
+        margin: auto;
+        margin-bottom: 1rem;
+        display: none;
+    }
+    .open-form-btn {
+        display: block;
+        grid-area: form;
+    }
+    .todo-title,
+    .select,
+    .date-picker,
+    .todo-description {
+        min-width: 90%;
+        display: none;
+    }
+    select {
+        width: 100%;
+    }
+    .todo-input {
+        margin: 1rem;
+    }
+
+    /* NAV */
+    nav {
+        grid-area: none;
+        display: none;
+        /* min-height: auto; */
+    }
+    .grid-container {
+        display: grid;
+        grid-template-columns: minmax(300px, 1fr) 4fr;
+        grid-template-areas:
+            "header header"
+            "form form"
+            "main main";
+        height: 100vh;
+        position: relative;
+    }
+
+    .todo-wrapper {
+        margin: 20px 40px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .todo-wrapper {
+        margin: 20px 10px;
+    }
 }
