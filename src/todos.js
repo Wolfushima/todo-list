@@ -104,13 +104,13 @@ export const todos = {
         const completedButton = document.createElement("button");
         completedButton.textContent = "+";
         completedButton.classList.add("complete-button");
-        todoTitleDiv.appendChild(completedButton);
+        todoDateDiv.appendChild(completedButton);
 
         //CHECK TRASH BUTTON
         const trashButton = document.createElement("button");
         trashButton.textContent = "-";
         trashButton.classList.add("trash-button");
-        todoTitleDiv.appendChild(trashButton);
+        todoDateDiv.appendChild(trashButton);
 
         //APPEND TO LIST
         todoWrapper.appendChild(todoTitleDiv);

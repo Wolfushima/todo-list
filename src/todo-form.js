@@ -35,6 +35,7 @@ export const todoForm = {
     openForm: () => {
         const openFormBtn = document.querySelector(".open-form-btn");
         const formBtn = document.querySelector("form button");
+        const hideFormBtn = document.querySelector(".hide-form-btn");
         const formTitle = document.querySelector(".todo-title");
         const formSelect = document.querySelector(".select");
         const formDate = document.querySelector(".date-picker");
@@ -46,6 +47,7 @@ export const todoForm = {
         openFormBtn.addEventListener("click", () => {
             filterIcon.style.display = "none";
             openFormBtn.style.display = "none";
+            hideFormBtn.style.display = "flex";
             formBtn.style.display = "flex";
             formTitle.style.display = "block";
             formSelect.style.display = "block";
@@ -53,6 +55,19 @@ export const todoForm = {
             formDescription.style.display = "block";
         })
 
+        hideFormBtn.addEventListener("click", () => {
+            formBtn.style.display = "none";
+            formTitle.style.display = "none";
+            formSelect.style.display = "none";
+            formDate.style.display = "none";
+            formDescription.style.display = "none";
+            hideFormBtn.style.display = "none";
+            filterIcon.style.display = "block";
+            openFormBtn.style.display = "block";
+            todoForm.form.reset();
+        })
+
+        //Handle Responsiveness
         if (mediaQuery.matches) {
             nav.style.display = "none";
         }
@@ -69,6 +84,7 @@ export const todoForm = {
                 formSelect.style.display = "none";
                 formDate.style.display = "none";
                 formDescription.style.display = "none";
+                hideFormBtn.style.display = "none";
             }
             else {
                 nav.style.display = "flex";
@@ -79,6 +95,7 @@ export const todoForm = {
                 formSelect.style.display = "block";
                 formDate.style.display = "block";
                 formDescription.style.display = "block";
+                hideFormBtn.style.display = "none";
             }
         })
     },

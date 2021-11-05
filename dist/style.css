@@ -246,19 +246,30 @@ select {
     max-height: 50px;
     min-width: 50px;
     width: 30%;
-    border: 1px solid #4a84cf;
+    border: 3px double #4a84cf;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: auto;
     z-index: 100;
 }
-.open-form-btn:hover {
+.open-form-btn:hover,
+form button:hover {
     background-color: #4a84cf69;
     color: hsl(214, 58%, 15%);
 }
 .open-form-btn:active {
     transform: scale(0.9);
+}
+
+.form-btns {
+    margin: auto;
+    width: auto;
+}
+.hide-form-btn {
+    grid-area: form;
+    background-color: #ffffff00;
+    display: none;
 }
 
 
@@ -390,6 +401,8 @@ h3 {
         margin: auto;
         margin-bottom: 1rem;
         display: none;
+        min-width: 35%;
+        border: 3px double #4a84cf;
     }
     .open-form-btn {
         display: block;
@@ -405,13 +418,25 @@ h3 {
     select {
         width: 100%;
     }
+    .form-btns {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+        width: 35%;
+    }
+    .hide-form-btn {
+        justify-content: center;
+        align-items: center;
+    }
+
+
     .todo-input {
         margin: 1rem;
     }
 
     /* NAV */
-
-
     nav {
         grid-area: form;
         display: none;
