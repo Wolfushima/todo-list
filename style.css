@@ -28,6 +28,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
+    min-height: 8vh;
     height: 8vh;
     background: #e2e8f0;
     background: #4a84cf;
@@ -93,6 +94,26 @@ nav {
     transform: scale(0.9);
 }
 
+/* NAV FILTER ICON */
+.filter-icon {
+    display: none;
+    cursor: pointer;
+    opacity: 0.8;
+    max-width: 35px;
+    max-height: 30px;
+}
+.filter-icon div {
+    width: 25px;
+    height: 3px;
+    border-radius: 1px;
+    background-color: #4a84cf;
+    margin: 5px;
+}
+
+.filter-icon:hover div{
+    background-color: hsl(214, 58%, 25%);
+}
+
 /*      MAIN    */
 main {
     grid-area: main;
@@ -152,14 +173,14 @@ form button {
 
 form button {
     background-color: rgba(255, 255, 255, 0);
-    color: rgb(0, 0, 0);
+    color: hsl(214, 58%, 25%);
     cursor: pointer;
     min-height: 50px;
     max-height: 50px;
     min-width: 50px;
     max-width: 50px;
     margin-left: -50px;
-    border: 1px solid black;
+    border: 1px solid #4a84cf;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -168,7 +189,7 @@ form button {
 
 select {
     background: white;
-    width: 8rem;
+    width: 8.5rem;
     height: 50px;
     cursor: pointer;
     padding: 1rem;
@@ -185,13 +206,14 @@ select {
 .select {
     margin: 1rem;
     position: relative;
+    color: hsl(214, 58%, 25%);
     /* overflow: hidden; */
 }
 .select::after {
     content: "\25BC";
     position: absolute;
     background: rgb(255, 255, 255);
-    border: 1px solid black;
+    border: 1px solid #4a84cf;
     min-height: 50px;
     max-height: 50px;
     min-width: 50px;
@@ -211,24 +233,34 @@ select {
     letter-spacing: 1px;
 }
 ::-webkit-calendar-picker-indicator{
-    margin-left: -10px;
+    margin-left: -15px;
 }
 
 .open-form-btn {
+    grid-area: form;
     display: none;
     background-color: rgba(255, 255, 255, 0);
-    color: rgb(0, 0, 0);
+    color: hsl(214, 58%, 25%);
     cursor: pointer;
     min-height: 50px;
     max-height: 50px;
     min-width: 50px;
-    max-width: 50px;
-    border: 1px solid black;
+    width: 30%;
+    border: 1px solid #4a84cf;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: auto;
+    z-index: 100;
 }
+.open-form-btn:hover {
+    background-color: #4a84cf69;
+    color: hsl(214, 58%, 15%);
+}
+.open-form-btn:active {
+    transform: scale(0.9);
+}
+
 
 /*  TODO LIST   */
 .todo-container {
@@ -309,7 +341,7 @@ h3 {
     background-color: #e2e8f0;
     border-radius: 4px;
     border: 1px solid #7a7a7a;
-    min-width: 300px;
+    min-width: 250px;
 }
 .description-content {
     overflow: hidden;
@@ -337,6 +369,18 @@ h3 {
 
 /* RESPONSIVENESS */
 @media screen and (max-width: 900px) {
+    /* GRID CONTAINER */
+    .grid-container {
+        display: grid;
+        grid-template-columns: minmax(300px, 1fr) 4fr;
+        grid-template-areas:
+            "header header"
+            "form form"
+            "main main";
+        height: 100vh;
+        position: relative;
+    }
+    
     /* FORM */
     form {
         flex-direction: column;
@@ -366,20 +410,33 @@ h3 {
     }
 
     /* NAV */
+
+
     nav {
-        grid-area: none;
+        grid-area: form;
         display: none;
-        /* min-height: auto; */
+        min-height: 200px;
+        height: 35vh;
+        z-index: 11;
+        background-color: hsl(214deg 32% 91%);
     }
-    .grid-container {
-        display: grid;
-        grid-template-columns: minmax(300px, 1fr) 4fr;
-        grid-template-areas:
-            "header header"
-            "form form"
-            "main main";
-        height: 100vh;
-        position: relative;
+    .main-projects-list {
+        background-color: hsl(214deg 32% 91%);
+        padding: 10px;
+        width: 50%;
+    }
+    .nav-btn {
+        padding: 10px 5px;
+    }
+
+    .filter-icon {
+        grid-area: form;
+        display: block;
+        margin-top: auto;
+        margin-bottom: auto;
+        margin-left: 40px;
+        margin-right: 40px;
+        z-index: 11;
     }
 
     .todo-wrapper {
@@ -390,5 +447,10 @@ h3 {
 @media screen and (max-width: 600px) {
     .todo-wrapper {
         margin: 20px 10px;
+    }
+    .filter-icon {
+        grid-area: form;
+        display: block;
+        margin: auto 10px;
     }
 }
