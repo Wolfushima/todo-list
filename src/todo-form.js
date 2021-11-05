@@ -1,3 +1,4 @@
+import { fil } from "date-fns/locale";
 import { pubsub } from "./pubsub.js";
 
 class Todo {
@@ -14,6 +15,7 @@ export const todoForm = {
     init: () => {
         todoForm.form.addEventListener("submit", todoForm.add);
         todoForm.openForm();
+        todoForm.handleFilter();
     },
     add: event => {
         event.preventDefault();
@@ -37,8 +39,12 @@ export const todoForm = {
         const formSelect = document.querySelector(".select");
         const formDate = document.querySelector(".date-picker");
         const formDescription = document.querySelector(".todo-description");
+        const filterIcon = document.querySelector(".filter-icon");
+        const mediaQuery = window.matchMedia('(max-width: 900px)');
+        const nav = document.querySelector("nav");
 
         openFormBtn.addEventListener("click", () => {
+            filterIcon.style.display = "none";
             openFormBtn.style.display = "none";
             formBtn.style.display = "flex";
             formTitle.style.display = "block";
@@ -46,12 +52,43 @@ export const todoForm = {
             formDate.style.display = "block";
             formDescription.style.display = "block";
         })
+
+        if (mediaQuery.matches) {
+            nav.style.display = "none";
+        }
+        else {
+            openFormBtn.style.display = "none";
+        }
+        window.addEventListener("resize", () => {
+            if (mediaQuery.matches) {
+                filterIcon.style.display = "block";
+                nav.style.display = "none";
+                openFormBtn.style.display = "block";
+                formBtn.style.display = "none";
+                formTitle.style.display = "none";
+                formSelect.style.display = "none";
+                formDate.style.display = "none";
+                formDescription.style.display = "none";
+            }
+            else {
+                nav.style.display = "flex";
+                openFormBtn.style.display = "none";
+                filterIcon.style.display = "none";
+                formBtn.style.display = "flex";
+                formTitle.style.display = "block";
+                formSelect.style.display = "block";
+                formDate.style.display = "block";
+                formDescription.style.display = "block";
+            }
+        })
     },
     handleOpenFormBtn: () => {
         const mediaQuery = window.matchMedia('(max-width: 900px)')
         const openFormBtn = document.querySelector(".open-form-btn");
+        const filterIcon = document.querySelector(".filter-icon");
         if ((mediaQuery.matches) && (openFormBtn.style.display === "none")) {
             openFormBtn.style.display = "block";
+            filterIcon.style.display = "block";
         }
     },
     handleForm: () => {
@@ -69,5 +106,20 @@ export const todoForm = {
             formDate.style.display = "none";
             formDescription.style.display = "none";
         }
+    },
+    handleFilter: () => {
+        const filterIcon = document.querySelector(".filter-icon");
+        const openFormBtn = document.querySelector(".open-form-btn");
+        const nav = document.querySelector("nav");
+        filterIcon.addEventListener("click", () => {
+            if (nav.style.display === "none") {
+                nav.style.display = "flex";
+                openFormBtn.style.display = "none";
+            }
+            else {
+                nav.style.display = "none";
+                openFormBtn.style.display = "block";
+            }
+        })
     }
 }
