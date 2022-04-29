@@ -103,6 +103,7 @@ export const todoForm = {
         const mediaQuery = window.matchMedia('(max-width: 900px)')
         const openFormBtn = document.querySelector(".open-form-btn");
         const filterIcon = document.querySelector(".filter-icon");
+
         if ((mediaQuery.matches) && (openFormBtn.style.display === "none")) {
             openFormBtn.style.display = "block";
             filterIcon.style.display = "block";
@@ -115,6 +116,7 @@ export const todoForm = {
         const formSelect = document.querySelector(".select");
         const formDate = document.querySelector(".date-picker");
         const formDescription = document.querySelector(".todo-description");
+        const hideFormBtn = document.querySelector(".hide-form-btn");
 
         if (mediaQuery.matches) {
             formBtn.style.display = "none";
@@ -122,6 +124,7 @@ export const todoForm = {
             formSelect.style.display = "none";
             formDate.style.display = "none";
             formDescription.style.display = "none";
+            hideFormBtn.style.display = "none";
         }
     },
     handleFilter: () => {
